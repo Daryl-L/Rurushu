@@ -1,0 +1,19 @@
+{
+    "name": "daryl/rurushu",
+    "description": "A framework for php.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "daryl",
+            "email": "daryl.moe@outlook.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Daryl\\Rurushu\\": "src/Rurushu"
+        }
+    }
+}
