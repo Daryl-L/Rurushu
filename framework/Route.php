@@ -6,7 +6,7 @@
  * Time: 下午11:43
  */
 
-namespace Framework;
+namespace Rurushu;
 
 
 class Route
@@ -19,6 +19,21 @@ class Route
             throw new \Exception("{$callback} is not a callable function.");
         }
 
-        $this->request['get'][$uri][$callback];
+        $this->request[$uri]['get'] = $callback;
+    }
+
+    public function parse(Request $request)
+    {
+        if (!isset($this->request[$request->getUri()])) {
+            throw new \Exception("Not found.");
+        } elseif (!isset($this->request[$request->getUri()][$request->getMethod()])) {
+            throw new \Exception("Method not allowed.");
+        } else {
+            $callback = $this->request[$request->getUri()][$request->getMethod()];
+            if (!($callback instanceof \Closure)) {
+                throw new \Exception("{$callback} is not a callable method.");
+            }
+            $callback($request);
+        }
     }
 }
